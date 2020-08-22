@@ -3,53 +3,57 @@
 def myKey(e):
   return e[0]
 
-# Whice file to run. If run 1.in, thrn IndexOfFile = 1
-# Change the value of IndexOfFile to run different files
-IndexOfFile = 3
+# Whice file to run. If run 1.in, thrn indexOfFile = 1
+# Change the value of indexOfFile to run different files
+indexOfFile = 4
 
-if IndexOfFile > 10 or IndexOfFile < 1:
+if indexOfFile > 10 or indexOfFile < 1:
     print("Wrong input file")
 else:
-    TimeInterval = []
-    InitialTimeInterval = []
-    with open(str(IndexOfFile) + '.in') as f:
+    timeInterval = []
+    initialTimeInterval = []
+    with open(str(indexOfFile) + '.in') as f:
         for line in f:
             numbers = [int(n) for n in line.split()]
             if len(numbers) == 1:
-                NumberOfFires = numbers
+                numberOfFires = numbers
             else:
-                TimeInterval.append(numbers)
+                timeInterval.append(numbers)
 
-    #print TimeInterval
-    #print NumberOfFires
+    #print timeInterval
+    #print numberOfFires
 
-    TimeInterval.sort(key=myKey)
-    AllCoverTime = []
+    timeInterval.sort(key=myKey)
+    allCoverTime = []
 
 
-    for all in range(len(TimeInterval)):
-        CoverTime = []
-        FireOne = TimeInterval.pop(all)
-        #print TimeInterval
-        StartCoverTime = int(TimeInterval[0][0])
-        for t in range(len(TimeInterval)):
-            if t < len(TimeInterval)-1:
-                if TimeInterval[t+1][0] < TimeInterval[t][1]:
-                    EndCoverTime = int(TimeInterval[t+1][1])
+    for all in range(len(timeInterval)):
+        coverTime = []
+        fireOne = timeInterval.pop(all)
+        #print timeInterval
+        startCoverTime = int(timeInterval[0][0])
+        for t in range(len(timeInterval)):
+            if t < len(timeInterval)-1:
+                if timeInterval[t+1][0] < timeInterval[t][1]:
+                    endCoverTime = int(timeInterval[t+1][1])
                 else:
-                    CoverTime.append(int(TimeInterval[t][1]) - StartCoverTime)
-                    StartCoverTime = int(TimeInterval[t+1][0])
+                    coverTime.append(int(timeInterval[t][1]) - startCoverTime)
+                    startCoverTime = int(timeInterval[t+1][0])
 
-            if t == len(TimeInterval)-1:
-                CoverTime.append(int(TimeInterval[t][1])-StartCoverTime)
+            if t == len(timeInterval)-1:
+                coverTime.append(int(timeInterval[t][1])-startCoverTime)
 
-        #print(CoverTime)
-        TimeInterval.insert(all,FireOne)
-        TimeSlot = sum(CoverTime)
-        AllCoverTime.append(TimeSlot)
+        #print(coverTime)
+        timeInterval.insert(all,fireOne)
+        timeSlot = sum(coverTime)
+        allCoverTime.append(timeSlot)
 
-    FireOneIndex = AllCoverTime.index(max(AllCoverTime))
-    print('It is optimal to hire the life guard with the index: ' + str(FireOneIndex+1))
-    FireOneGaurds = TimeInterval[FireOneIndex]
-    print('His shift is: ' + str(FireOneGaurds))
-    print('The maximum coverage time is: ' + str(max(AllCoverTime)))
+    fireOneIndex = allCoverTime.index(max(allCoverTime))
+    print('It is optimal to hire the life guard with the index: ' + str(fireOneIndex+1))
+    fireOneGaurds = timeInterval[fireOneIndex]
+    print('His shift is: ' + str(fireOneGaurds))
+    print('The maximum coverage time is: ' + str(max(allCoverTime)))
+    String = 'It is optimal to hire the life guard with the index: ' + str(fireOneIndex+1) + '. The maximum coverage time is: ' + str(max(allCoverTime))
+    f = open(str(indexOfFile) + '.out', "w")
+    f.write(String)
+    f.close()
