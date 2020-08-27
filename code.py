@@ -5,7 +5,7 @@ def myKey(e):
 
 # Whice file to run. If run 1.in, thrn indexOfFile = 1
 # Change the value of indexOfFile to run different files
-indexOfFile = 4
+indexOfFile = 10
 
 if indexOfFile > 10 or indexOfFile < 1:
     print("Wrong input file")
